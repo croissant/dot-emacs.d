@@ -1,0 +1,22 @@
+#!/usr/bin/env ruby
+# coding: utf-8
+#
+# for bundler
+# require 'bundler'
+# Bundler.require
+#
+# for Minitest
+# require 'minitest/autorun'
+#
+# for Rake::Testtask
+# require 'rake/testtask'
+#
+# for ActiveSupport::Dependencies
+# require 'active_support/dependencies'
+# ActiveSupport::Dependencies.autoload_paths << '/path/to/lib'
+#
+# for Rakefile
+# task :default do
+#   # default task
+# end
+#
