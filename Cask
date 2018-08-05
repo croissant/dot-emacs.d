@@ -10,6 +10,7 @@
 (depends-on "flycheck")
 (depends-on "auto-save-buffers-enhanced")
 (depends-on "simplenote")
+(depends-on "editorconfig")
 
 (depends-on "coffee-mode")
 (depends-on "js2-mode")
@@ -27,3 +28,4 @@
 (depends-on "company")
 (depends-on "minitest")
 (depends-on "rspec-mode")
+(depends-on "vue-mode")

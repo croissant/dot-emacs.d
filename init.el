@@ -1,6 +1,13 @@
 
 ;; cask
-(require 'cask "~/.cask/cask.el")
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
+(require 'cask "/usr/local/cask/cask.el")
 (cask-initialize)
 
 ;; theme
@@ -51,6 +58,11 @@
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
+
+;; editorconfig
+(editorconfig-mode 1)
+(setq editorconfig-get-properties-function
+      'editorconfig-core-get-properties-hash)
 
 ;; php-mode
 (require 'php-mode)
@@ -158,6 +170,9 @@
 
 (add-hook 'coffee-mode-hook
   '(lambda() (coffee-custom)))
+
+;; js
+(setq indet-tabs-mode nil js-indent-level 2)
 
 ;; scss
 (autoload 'scss-mode "scss-mode")
