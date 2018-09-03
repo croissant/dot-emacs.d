@@ -11,6 +11,7 @@
 (depends-on "auto-save-buffers-enhanced")
 (depends-on "simplenote")
 (depends-on "editorconfig")
+(depends-on "iflipb")
 
 (depends-on "coffee-mode")
 (depends-on "js2-mode")

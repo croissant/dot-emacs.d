@@ -41,6 +41,9 @@
 ;; バッファ中の行番号表示
 (global-linum-mode t)
 
+(global-set-key (kbd "M-n") 'iflipb-next-buffer)
+(global-set-key (kbd "M-p") 'iflipb-previous-buffer)
+
 ;; 行番号のフォーマット
 (set-face-attribute 'linum nil :foreground "MediumVioletRed" :height 0.8)
 (setq linum-format "%4d|")
@@ -92,7 +95,7 @@
 
 (defun php-cs-fix ()
   (interactive)
-  (progn (shell-command (concat "~/.config/composer/vendor/bin/php-cs-fixer fix " (buffer-file-name) " --level=symfony"))
+  (progn (shell-command (concat "~/.composer/vendor/bin/php-cs-fixer fix " (buffer-file-name) " --rules=@Symfony"))
          (revert-buffer nil t)))
 (add-hook 'php-mode-hook 'flycheck-mode)
 
