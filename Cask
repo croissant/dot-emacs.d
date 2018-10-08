@@ -30,3 +30,7 @@
 (depends-on "minitest")
 (depends-on "rspec-mode")
 (depends-on "vue-mode")
+(depends-on "docker")
+(depends-on "dockerfile-mode")
+(depends-on "docker-compose-mode")
+(depends-on "docker-tramp")
