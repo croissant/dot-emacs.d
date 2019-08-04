@@ -7,7 +7,7 @@
 ;; You may delete these explanatory comments.
 (package-initialize)
 
-(require 'cask "/usr/local/cask/cask.el")
+(require 'cask "~/.cask/cask.el")
 (cask-initialize)
 
 ;; theme
@@ -68,6 +68,7 @@
       'editorconfig-core-get-properties-hash)
 
 ;; php-mode
+(setq php-mode-coding-style (quote psr2))
 (require 'php-mode)
 ;; (custom-set-variables
  ;; custom-set-variables was added by Custom.
