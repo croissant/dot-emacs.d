@@ -63,9 +63,9 @@
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
 ;; editorconfig
-(editorconfig-mode 1)
-(setq editorconfig-get-properties-function
-      'editorconfig-core-get-properties-hash)
+;(editorconfig-mode 1)
+;(setq editorconfig-get-properties-function
+;      'editorconfig-core-get-properties-hash)
 
 ;; php-mode
 (setq php-mode-coding-style (quote psr2))
@@ -96,7 +96,7 @@
 
 (defun php-cs-fix ()
   (interactive)
-  (progn (shell-command (concat "~/.composer/vendor/bin/php-cs-fixer fix " (buffer-file-name) " --rules=@Symfony"))
+  (progn (shell-command (concat "php-cs-fixer fix " (buffer-file-name) " --rules=@Symfony"))
          (revert-buffer nil t)))
 (add-hook 'php-mode-hook 'flycheck-mode)
 

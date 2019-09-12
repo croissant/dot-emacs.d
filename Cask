@@ -13,6 +13,8 @@
 (depends-on "editorconfig")
 (depends-on "iflipb")
 
+(depends-on "py-autopep8")
+(depends-on "python-docstring")
 (depends-on "coffee-mode")
 (depends-on "js2-mode")
 (depends-on "json-mode")
@@ -34,4 +36,3 @@
 (depends-on "dockerfile-mode")
 (depends-on "docker-compose-mode")
 (depends-on "docker-tramp")
-(depends-on "editorconfig")
