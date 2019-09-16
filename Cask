@@ -15,7 +15,8 @@
 
 (depends-on "py-autopep8")
 (depends-on "python-docstring")
-(depends-on "coffee-mode")
+(depends-on "pipenv")
+(depends-on "rjsx-mode")
 (depends-on "js2-mode")
 (depends-on "json-mode")
 (depends-on "rhtml-mode")
