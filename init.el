@@ -1,14 +1,52 @@
-
-;; cask
-
-;; Added by Package.el.  This must come before configurations of
-;; installed packages.  Don't delete this line.  If you don't want it,
-;; just comment it out by adding a semicolon to the start of the line.
-;; You may delete these explanatory comments.
 (package-initialize)
+(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;(if (require 'quelpa nil t)
+;    (quelpa-self-upgrade)
+;  (with-temp-buffer
+;    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
+;    (eval-buffer)))
 
-(require 'cask "~/.cask/cask.el")
-(cask-initialize)
+(quelpa 'ag)
+(quelpa 'helm)
+(quelpa 'auto-complete)
+(quelpa 'yasnippet)
+(quelpa 'magit)
+(quelpa 'flycheck)
+(quelpa 'auto-save-buffers-enhanced)
+(quelpa 'simplenote)
+(quelpa 'editorconfig)
+(quelpa 'iflipb)
+(quelpa 'py-autopep8)
+(quelpa 'python-docstring)
+(quelpa 'pipenv)
+(quelpa 'rjsx-mode)
+(quelpa 'prettier-js)
+(quelpa 'js2-mode)
+(quelpa 'json-mode)
+(quelpa 'js-auto-format-mode)
+(quelpa 'add-node-modules-path)
+(quelpa 'rhtml-mode)
+(quelpa 'ruby-mode)
+(quelpa 'scss-mode)
+(quelpa 'php-mode)
+(quelpa 'lua-mode)
+(quelpa 'actionscript-mode)
+(quelpa 'yaml-mode)
+(quelpa 'markdown-mode)
+(quelpa 'go-mode)
+(quelpa 'rubocop)
+(quelpa 'company)
+(quelpa 'minitest)
+(quelpa 'rspec-mode)
+;(quelpa 'vue-mode)
+(quelpa 'docker)
+(quelpa 'dockerfile-mode)
+(quelpa 'docker-compose-mode)
+(quelpa 'docker-tramp)
+(quelpa 'meghanada-mode)
+
+(global-auto-revert-mode 1)
+(setq auto-revert-interval 1)
 
 ;; theme
 (load-theme 'tango-dark t)
@@ -177,6 +215,16 @@
 
 ;; js
 (setq indet-tabs-mode nil js-indent-level 2)
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(js-auto-format-command "prettier")
+ '(js-auto-format-command-args "--write --single-quote")
+ '(package-selected-packages
+   (quote
+    (meghanada docker-compose-mode minitest company js-auto-format-mode pipenv python-docstring iflipb auto-save-buffers-enhanced))))
 
 ;; scss
 (autoload 'scss-mode "scss-mode")
