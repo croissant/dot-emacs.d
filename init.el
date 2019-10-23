@@ -1,4 +1,9 @@
+;;; package --- Summary
+;;; init.el
+;;; Commentary:
+;;; Code:
 (package-initialize)
+
 (add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
 ;(if (require 'quelpa nil t)
 ;    (quelpa-self-upgrade)
@@ -38,7 +43,6 @@
 (quelpa 'company)
 (quelpa 'minitest)
 (quelpa 'rspec-mode)
-;(quelpa 'vue-mode)
 (quelpa 'docker)
 (quelpa 'dockerfile-mode)
 (quelpa 'docker-compose-mode)
@@ -46,7 +50,7 @@
 (quelpa 'meghanada-mode)
 
 (global-auto-revert-mode 1)
-(setq auto-revert-interval 1)
+(defvar auto-revert-interval 1)
 
 ;; theme
 (load-theme 'tango-dark t)
@@ -76,15 +80,11 @@
 
 (column-number-mode t)
 
-;; バッファ中の行番号表示
-(global-linum-mode t)
-
 (global-set-key (kbd "M-n") 'iflipb-next-buffer)
 (global-set-key (kbd "M-p") 'iflipb-previous-buffer)
 
-;; 行番号のフォーマット
-(set-face-attribute 'linum nil :foreground "MediumVioletRed" :height 0.8)
-(setq linum-format "%4d|")
+;; バッファ中の行番号表示
+(global-display-line-numbers-mode)
 
 ;; 現在行をハイライト
 (global-hl-line-mode t)
@@ -183,10 +183,10 @@
 ;(require 'vc-git)
 
 ;; company-mode
+(add-hook 'java-mode-hook 'company-mode)
 (add-hook 'php-mode-hook 'company-mode)
 (add-hook 'python-mode-hook 'company-mode)
 (add-hook 'ruby-mode-hook 'company-mode)
-(add-hook 'java-mode-hook 'company-mode)
 (with-eval-after-load 'company
   (define-key company-active-map (kbd "C-n") 'company-select-next)
   (define-key company-active-map (kbd "C-p") 'company-select-previous)
@@ -308,6 +308,8 @@
  ;; If there is more than one, they won't work right.
  '(font-lock-builtin-face ((t (:foreground "color-141"))))
  '(font-lock-string-face ((t (:foreground "color-142"))))
+ '(line-number ((t (:foreground "brightmagenta"))))
+ '(line-number-current-line ((t (:background "brightmagenta" :foreground "black"))))
  '(magit-section-highlight ((t (:background "brightblack")))))
 
 (provide 'init)
