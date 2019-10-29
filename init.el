@@ -2,52 +2,54 @@
 ;;; init.el
 ;;; Commentary:
 ;;; Code:
-(package-initialize)
+;(package-initialize)
 
-(add-to-list 'package-archives '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;(if (require 'quelpa nil t)
-;    (quelpa-self-upgrade)
-;  (with-temp-buffer
-;    (url-insert-file-contents "https://raw.github.com/quelpa/quelpa/master/bootstrap.el")
-;    (eval-buffer)))
+(add-to-list 'load-path (locate-user-emacs-file "el-get/el-get"))
+ (unless (require 'el-get nil 'noerror)
+   (with-current-buffer
+       (url-retrieve-synchronously "https://raw.githubusercontent.com/dimitri/el-get/master/el-get-install.el")
+     (goto-char (point-max))
+     (eval-print-last-sexp)))
+ (add-to-list 'el-get-recipe-path "~/.emacs.d/el-get-user/recipes")
 
-(quelpa 'ag)
-(quelpa 'helm)
-(quelpa 'auto-complete)
-(quelpa 'yasnippet)
-(quelpa 'magit)
-(quelpa 'flycheck)
-(quelpa 'auto-save-buffers-enhanced)
-(quelpa 'simplenote)
-(quelpa 'editorconfig)
-(quelpa 'iflipb)
-(quelpa 'py-autopep8)
-(quelpa 'python-docstring)
-(quelpa 'pipenv)
-(quelpa 'rjsx-mode)
-(quelpa 'prettier-js)
-(quelpa 'js2-mode)
-(quelpa 'json-mode)
-(quelpa 'js-auto-format-mode)
-(quelpa 'add-node-modules-path)
-(quelpa 'rhtml-mode)
-(quelpa 'ruby-mode)
-(quelpa 'scss-mode)
-(quelpa 'php-mode)
-(quelpa 'lua-mode)
-(quelpa 'actionscript-mode)
-(quelpa 'yaml-mode)
-(quelpa 'markdown-mode)
-(quelpa 'go-mode)
-(quelpa 'rubocop)
-(quelpa 'company)
-(quelpa 'minitest)
-(quelpa 'rspec-mode)
-(quelpa 'docker)
-(quelpa 'dockerfile-mode)
-(quelpa 'docker-compose-mode)
-(quelpa 'docker-tramp)
-(quelpa 'meghanada-mode)
+(el-get-bundle 'ag)
+(el-get-bundle 'helm)
+(el-get-bundle 'auto-complete)
+(el-get-bundle 'yasnippet)
+(el-get-bundle 'magit)
+(el-get-bundle 'flycheck)
+(el-get-bundle 'auto-save-buffers-enhanced)
+(el-get-bundle 'simplenote)
+(el-get-bundle 'editorconfig)
+(el-get-bundle 'iflipb)
+(el-get-bundle 'py-autopep8)
+(el-get-bundle 'python-docstring)
+(el-get-bundle 'pipenv)
+(el-get-bundle 'rjsx-mode)
+(el-get-bundle 'prettier-js)
+(el-get-bundle 'js2-mode)
+(el-get-bundle 'json-mode)
+(el-get-bundle 'js-auto-format-mode)
+(el-get-bundle 'add-node-modules-path)
+(el-get-bundle 'rhtml-mode)
+(el-get-bundle 'ruby-mode)
+(el-get-bundle 'scss-mode)
+(el-get-bundle 'php-mode)
+(el-get-bundle 'web-mode)
+(el-get-bundle 'lua-mode)
+(el-get-bundle 'actionscript-mode)
+(el-get-bundle 'yaml-mode)
+(el-get-bundle 'markdown-mode)
+(el-get-bundle 'go-mode)
+(el-get-bundle 'rubocop)
+(el-get-bundle 'company)
+(el-get-bundle 'minitest)
+(el-get-bundle 'rspec-mode)
+(el-get-bundle 'docker)
+(el-get-bundle 'dockerfile-mode)
+(el-get-bundle 'docker-compose-mode)
+(el-get-bundle 'docker-tramp)
+(el-get-bundle 'use-package)
 
 (global-auto-revert-mode 1)
 (defvar auto-revert-interval 1)
@@ -106,23 +108,22 @@
 ;      'editorconfig-core-get-properties-hash)
 
 ;; php-mode
-(setq php-mode-coding-style (quote psr2))
-(require 'php-mode)
-;; (custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
-;; '(php-mode-force-pear t))
+(defun my-php-mode-setup ()
+  "My PHP-mode hook."
+  (subword-mode 1)
+  (setq show-trailing-whitespace t)
+  (setq-local page-delimiter "\\_<\\(class\\|function\\|namespace\\)\\_>.+$")
 
-(defun php-mode-hook ()
-  (setq tab-width 4
-        c-basic-offset 4
-        c-hanging-comment-ender-p nil
-        indent-tabs-mode
-        (not
-         (and (string-match "/\\(PEAR\\|pear\\)/" (buffer-file-name))
-              (string-match "\.php$" (buffer-file-name))))))
+  (flycheck-mode t)
+  (add-to-list 'flycheck-disabled-checkers 'php-phpmd)
+  (add-to-list 'flycheck-disabled-checkers 'php-phpcs))
+
+(use-package php-mode
+  :hook ((php-mode . my-php-mode-setup))
+  :custom
+  (php-manual-url 'ja)
+  (php-mode-coding-style 'psr2)
+  (php-mode-template-compatibility nil))
 
 (add-hook 'php-mode-hook
           (function (lambda ()
@@ -136,7 +137,6 @@
   (interactive)
   (progn (shell-command (concat "php-cs-fixer fix " (buffer-file-name) " --rules=@Symfony"))
          (revert-buffer nil t)))
-(add-hook 'php-mode-hook 'flycheck-mode)
 
 ;; ruby-mode
 (autoload 'ruby-mode "ruby-mode"
