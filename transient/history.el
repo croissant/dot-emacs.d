@@ -1,7 +1,2 @@
 ((magit-commit nil)
- (magit-diff
-  ("--no-ext-diff" "--stat"))
- (magit-dispatch nil)
- (magit-push nil
-             ("--force-with-lease"))
- (magit-submodule nil))
+ (magit-push nil))
