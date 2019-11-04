@@ -2,4 +2,5 @@ auto-save-list/
 .cask/
 recentf
 el-get/
-elpa
+elpa/
+transient/
