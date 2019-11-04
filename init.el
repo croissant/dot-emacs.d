@@ -14,12 +14,10 @@
 
 (el-get-bundle 'ag)
 (el-get-bundle 'helm)
-(el-get-bundle 'auto-complete)
 (el-get-bundle 'yasnippet)
 (el-get-bundle 'magit)
 (el-get-bundle 'flycheck)
 (el-get-bundle 'auto-save-buffers-enhanced)
-(el-get-bundle 'simplenote)
 (el-get-bundle 'editorconfig)
 (el-get-bundle 'iflipb)
 (el-get-bundle 'py-autopep8)
@@ -50,9 +48,12 @@
 (el-get-bundle 'docker-compose-mode)
 (el-get-bundle 'docker-tramp)
 (el-get-bundle 'use-package)
+(el-get-bundle 'undo-tree)
 
 (global-auto-revert-mode 1)
 (defvar auto-revert-interval 1)
+
+(global-undo-tree-mode t)
 
 ;; theme
 (load-theme 'tango-dark t)
@@ -60,6 +61,7 @@
 (fset 'yes-or-no-p 'y-or-n-p)
 
 (recentf-mode 1)
+
 
 (prefer-coding-system 'utf-8-unix)
 (set-file-name-coding-system 'utf-8-unix)
@@ -98,6 +100,30 @@
     (t (:bold t)))
   "hl-line's my face")
 (setq hl-line-face 'my-hl-line-face)
+
+;; yasnippet
+(setq yas-snippet-dirs
+      '("~/.emacs.d/snippets"))
+(yas-global-mode 1)
+
+;; company-mode
+(global-company-mode)
+(setq company-idle-delay 0)
+(setq company-selection-wrap-around t)
+(define-key company-active-map (kbd "C-n") 'company-select-next)
+(define-key company-active-map (kbd "C-p") 'company-select-previous)
+(define-key company-search-map (kbd "C-n") 'company-select-next)
+(define-key company-search-map (kbd "C-p") 'company-select-previous)
+(define-key company-active-map [tab] 'company-complete-selection)
+
+(defvar company-mode/enable-yas t
+  "Enable yasnippet for all backends.")
+(defun company-mode/backend-with-yas (backend)
+  (if (or (not company-mode/enable-yas) (and (listp backend) (member 'company-yasnippet backend)))
+      backend
+    (append (if (consp backend) backend (list backend))
+            '(:with company-yasnippet))))
+(setq company-backends (mapcar #'company-mode/backend-with-yas company-backends))
 
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
@@ -177,21 +203,10 @@
             (setq gofmt-command "goimports")
             (setq-default)))
 ;; git
-(require 'magit)
+;(require 'magit)
 (setq magit-last-seen-setup-instructions "1.4.0")
 ;(require 'git-blame)
 ;(require 'vc-git)
-
-;; company-mode
-(add-hook 'java-mode-hook 'company-mode)
-(add-hook 'php-mode-hook 'company-mode)
-(add-hook 'python-mode-hook 'company-mode)
-(add-hook 'ruby-mode-hook 'company-mode)
-(with-eval-after-load 'company
-  (define-key company-active-map (kbd "C-n") 'company-select-next)
-  (define-key company-active-map (kbd "C-p") 'company-select-previous)
-  (define-key company-active-map [tab] 'company-complete-selection)
-  (define-key company-active-map (kbd "C-h") nil))
 
 ;; org-mode
 (require 'org)
@@ -238,7 +253,7 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 ;; helm
-(require 'helm)
+;(require 'helm)
 ;(require 'helm-config)
 ;(helm-mode 1)
 
@@ -259,12 +274,6 @@
       (append '(("\\.rst$" . rst-mode)
                 ("\\.rest$" . rst-mode)
                 ) auto-mode-alist))
-
-;; yasnippet
-(require 'yasnippet)
-(setq yas-snippet-dirs
-      '("~/.emacs.d/snippets"))
-(yas-global-mode 1)
 
 (require 'autoinsert)
 ;; テンプレートのディレクトリ
@@ -310,7 +319,14 @@
  '(font-lock-string-face ((t (:foreground "color-142"))))
  '(line-number ((t (:foreground "brightmagenta"))))
  '(line-number-current-line ((t (:background "brightmagenta" :foreground "black"))))
- '(magit-section-highlight ((t (:background "brightblack")))))
+ '(magit-section-highlight ((t (:background "brightblack"))))
+ '(company-tooltip ((t (:foreground "black" :background "lightgrey"))))
+ '(company-tooltip-common ((t (:foreground "black" :background "lightgrey"))))
+ '(company-tooltip-common-selection ((t (:foreground "white" :background "steelblue"))))
+ '(company-tooltip-selection ((t (:foreground "black" :background "steelblue"))))
+ '(company-preview-common ((t (:background nil :foreground "lightgrey" :underline t))))
+ '(company-scrollbar-fg ((t (:background "orange"))))
+ '(company-scrollbar-bg ((t (:background "gray40")))))
 
 (provide 'init)
 ;;; init.el ends here
