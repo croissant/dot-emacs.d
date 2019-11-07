@@ -55,13 +55,11 @@
 
 (global-undo-tree-mode t)
 
-;; theme
 (load-theme 'tango-dark t)
-
 (fset 'yes-or-no-p 'y-or-n-p)
-
 (recentf-mode 1)
-
+(menu-bar-mode nil)
+(column-number-mode t)
 
 (prefer-coding-system 'utf-8-unix)
 (set-file-name-coding-system 'utf-8-unix)
@@ -79,10 +77,6 @@
 (global-set-key [kp-enter] 'newline)
 
 (setq-default indent-tabs-mode nil)
-
-(menu-bar-mode nil)
-
-(column-number-mode t)
 
 (global-set-key (kbd "M-n") 'iflipb-next-buffer)
 (global-set-key (kbd "M-p") 'iflipb-previous-buffer)
@@ -128,11 +122,6 @@
 ;; flycheck
 (add-hook 'after-init-hook #'global-flycheck-mode)
 
-;; editorconfig
-;(editorconfig-mode 1)
-;(setq editorconfig-get-properties-function
-;      'editorconfig-core-get-properties-hash)
-
 ;; php-mode
 (defun my-php-mode-setup ()
   "My PHP-mode hook."
@@ -177,7 +166,6 @@
 (auto-save-buffers-enhanced t)
 ;(run-with-idle-timer 0.5 t 'auto-save-buffers-enhanced)
 
-
 (setq truncate-partial-width-windows nil)
 
 ;; cperl-mode
@@ -191,22 +179,13 @@
 (add-to-list 'auto-mode-alist '("\\.lua$" . lua-mode))
 (add-to-list 'interpreter-mode-alist '("lua" . lua-mode))
 
-;; ActionScript
-(autoload 'actionscript-mode "actionscript-mode" "actionscript" t)
-(setq auto-mode-alist
-      (append '(("\\.as$" . actionscript-mode))
-              auto-mode-alist))
-
 ;; golang
 (add-hook 'go-mode-hook
           (lambda ()
             (setq gofmt-command "goimports")
             (setq-default)))
 ;; git
-;(require 'magit)
 (setq magit-last-seen-setup-instructions "1.4.0")
-;(require 'git-blame)
-;(require 'vc-git)
 
 ;; org-mode
 (require 'org)
@@ -225,15 +204,6 @@
 (require 'yaml-mode)
 (put 'downcase-region 'disabled nil)
 
-;; coffee
-(defun coffee-custom ()
-  "coffee-mode-hook"
- (set (make-local-variable 'tab-width) 2)
- (setq coffee-tab-width 2))
-
-(add-hook 'coffee-mode-hook
-  '(lambda() (coffee-custom)))
-
 ;; js
 (setq indet-tabs-mode nil js-indent-level 2)
 (custom-set-variables
@@ -245,7 +215,7 @@
  '(js-auto-format-command-args "--write --single-quote")
  '(package-selected-packages
    (quote
-    (meghanada docker-compose-mode minitest company js-auto-format-mode pipenv python-docstring iflipb auto-save-buffers-enhanced))))
+    (docker-compose-mode minitest company js-auto-format-mode pipenv python-docstring iflipb auto-save-buffers-enhanced))))
 
 ;; scss
 (autoload 'scss-mode "scss-mode")
@@ -253,27 +223,14 @@
 (add-to-list 'auto-mode-alist '("\\.scss\\'" . scss-mode))
 
 ;; helm
-;(require 'helm)
-;(require 'helm-config)
-;(helm-mode 1)
-
 (global-set-key (kbd "M-x") 'helm-M-x)
 (global-set-key (kbd "C-x C-r") 'helm-recentf)
 (global-set-key (kbd "M-.") 'helm-etags-select)
-
-(require 'cl)
-(defun close-all-buffers ()
-  (interactive)
-  (loop for buffer being the buffers
-        do (kill-buffer buffer)))
-
-;; rst.elを読み込み
-(require 'rst)
-;; *.rst, *.restファイルをrst-modeでOpen
-(setq auto-mode-alist
-      (append '(("\\.rst$" . rst-mode)
-                ("\\.rest$" . rst-mode)
-                ) auto-mode-alist))
+(global-set-key (kbd "M-y") 'helm-show-kill-ring)
+(global-set-key (kbd "C-x b") 'helm-mini)
+(global-set-key (kbd "C-c h") 'helm-semantic-or-imenu)
+(setq helm-semantic-fuzzy-match t
+      helm-imenu-fuzzy-match    t)
 
 (require 'autoinsert)
 ;; テンプレートのディレクトリ
@@ -301,14 +258,6 @@
   (goto-char (point-max))
   (message "done."))
 (add-hook 'find-file-not-found-hooks 'auto-insert)
-
-
-(add-hook 'rhtml-mode-hook
-          (lambda ()
-            (set-face-background 'erb-face "brightblack")
-            (set-face-underline-p 'erb-face t)
-            (set-face-background 'erb-exec-face "brightblack")
-            (set-face-underline-p 'erb-exec-face t)))
 
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
