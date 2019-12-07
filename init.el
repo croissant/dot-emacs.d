@@ -49,6 +49,9 @@
 (el-get-bundle 'docker-tramp)
 (el-get-bundle 'use-package)
 (el-get-bundle 'undo-tree)
+(el-get-bundle 'lsp-mode)
+(el-get-bundle 'lsp-ui)
+(el-get-bundle 'org-mode)
 
 (global-auto-revert-mode 1)
 (defvar auto-revert-interval 1)
@@ -188,10 +191,16 @@
 (setq magit-last-seen-setup-instructions "1.4.0")
 
 ;; org-mode
-(require 'org)
+(setq org-directory "~/Dropbox/org")
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 (define-key global-map "\C-cl" 'org-store-link)
 (define-key global-map "\C-ca" 'org-agenda)
+(define-key global-map "\C-cc" 'org-capture)
+(setq org-capture-templates
+      '(
+        ("a" "aws" entry (file+headline "~/Dropbox/org/aws.org" "aws") "* %?")
+        ("n" "Note" entry (file+headline "~/Dropbox/org/notes.org" "Notes") "* %?\nEntered on %<%Y-%m-%d %H:%M:%S>")
+        ))
 (setq org-log-done t)
 
 ;; markdown
