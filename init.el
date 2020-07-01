@@ -85,7 +85,8 @@
 (global-set-key (kbd "M-p") 'iflipb-previous-buffer)
 
 ;; バッファ中の行番号表示
-(global-display-line-numbers-mode)
+(global-linum-mode t)
+(setq linum-format "%4d ")
 
 ;; 現在行をハイライト
 (global-hl-line-mode t)
