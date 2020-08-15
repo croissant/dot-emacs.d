@@ -16,6 +16,7 @@
 (el-get-bundle 'helm)
 (el-get-bundle 'yasnippet)
 (el-get-bundle 'magit)
+(el-get-bundle 'python-mode)
 (el-get-bundle 'flycheck)
 (el-get-bundle 'auto-save-buffers-enhanced)
 (el-get-bundle 'editorconfig)
@@ -38,7 +39,6 @@
 (el-get-bundle 'actionscript-mode)
 (el-get-bundle 'yaml-mode)
 (el-get-bundle 'markdown-mode)
-(el-get-bundle 'go-mode)
 (el-get-bundle 'rubocop)
 (el-get-bundle 'company)
 (el-get-bundle 'minitest)
@@ -52,6 +52,10 @@
 (el-get-bundle 'lsp-mode)
 (el-get-bundle 'lsp-ui)
 (el-get-bundle 'org-mode)
+(el-get-bundle 'ein)
+(el-get-bundle 'go-mode)
+(el-get-bundle 'company-go)
+(el-get-bundle 'go-eldoc)
 
 (global-auto-revert-mode 1)
 (defvar auto-revert-interval 1)
@@ -186,7 +190,9 @@
 (add-hook 'go-mode-hook
           (lambda ()
             (setq gofmt-command "goimports")
+            (setq tab-width 4)
             (setq-default)))
+
 ;; git
 (setq magit-last-seen-setup-instructions "1.4.0")
 
@@ -224,7 +230,7 @@
  '(js-auto-format-command-args "--write --single-quote")
  '(package-selected-packages
    (quote
-    (docker-compose-mode minitest company js-auto-format-mode pipenv python-docstring iflipb auto-save-buffers-enhanced))))
+    (company-go docker-compose-mode minitest company js-auto-format-mode pipenv python-docstring iflipb auto-save-buffers-enhanced))))
 
 ;; scss
 (autoload 'scss-mode "scss-mode")
@@ -273,18 +279,18 @@
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(font-lock-builtin-face ((t (:foreground "color-141"))))
- '(font-lock-string-face ((t (:foreground "color-142"))))
- '(line-number ((t (:foreground "brightmagenta"))))
- '(line-number-current-line ((t (:background "brightmagenta" :foreground "black"))))
- '(magit-section-highlight ((t (:background "brightblack"))))
+ '(company-preview-common ((t (:background nil :foreground "lightgrey" :underline t))))
+ '(company-scrollbar-bg ((t (:background "gray40"))))
+ '(company-scrollbar-fg ((t (:background "orange"))))
  '(company-tooltip ((t (:foreground "black" :background "lightgrey"))))
  '(company-tooltip-common ((t (:foreground "black" :background "lightgrey"))))
  '(company-tooltip-common-selection ((t (:foreground "white" :background "steelblue"))))
  '(company-tooltip-selection ((t (:foreground "black" :background "steelblue"))))
- '(company-preview-common ((t (:background nil :foreground "lightgrey" :underline t))))
- '(company-scrollbar-fg ((t (:background "orange"))))
- '(company-scrollbar-bg ((t (:background "gray40")))))
+ '(font-lock-builtin-face ((t (:foreground "color-141"))))
+ '(font-lock-string-face ((t (:foreground "color-142"))))
+ '(line-number ((t (:foreground "brightmagenta"))))
+ '(line-number-current-line ((t (:background "brightmagenta" :foreground "black"))))
+ '(magit-section-highlight ((t (:background "brightblack")))))
 
 (provide 'init)
 ;;; init.el ends here
