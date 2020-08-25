@@ -56,6 +56,7 @@
 (el-get-bundle 'go-mode)
 (el-get-bundle 'company-go)
 (el-get-bundle 'go-eldoc)
+(el-get-bundle 'typescript-mode)
 
 (global-auto-revert-mode 1)
 (defvar auto-revert-interval 1)
