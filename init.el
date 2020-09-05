@@ -57,6 +57,7 @@
 (el-get-bundle 'company-go)
 (el-get-bundle 'go-eldoc)
 (el-get-bundle 'typescript-mode)
+(el-get-bundle 'eshell-prompt-extras)
 
 (global-auto-revert-mode 1)
 (defvar auto-revert-interval 1)
@@ -103,6 +104,12 @@
     (t (:bold t)))
   "hl-line's my face")
 (setq hl-line-face 'my-hl-line-face)
+
+;; eshell
+(eval-after-load 'esh-opt
+  '(progn (require 'eshell-prompt-extras)
+          (setq eshell-highlight-prompt nil
+                eshell-prompt-function 'epe-theme-lambda)))
 
 ;; yasnippet
 (setq yas-snippet-dirs
